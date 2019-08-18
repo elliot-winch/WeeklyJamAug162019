@@ -10,9 +10,36 @@ public static class ListExtensions
         return v.Where(x => x != null);
     }
 
+    public static List<T> Random<T>(this List<T> v, int count)
+    {
+        var operationsList = v.ToList();
+        var selected = new List<T>();
+
+        if (count > v.Count)
+        {
+            return operationsList;
+        }
+
+        for (int i = 0; i < count; i++)
+        {
+            var index = operationsList.RandomIndex();
+
+            selected.Add(operationsList[index]);
+
+            operationsList.RemoveAt(index);
+        }
+
+        return selected;
+    }
+
     public static T Random<T>(this List<T> v)
     {
-        return v[(int)(UnityEngine.Random.value * v.Count)];
+        return v.Count != 0 ? v[RandomIndex(v)] : default;
+    }
+
+    public static int RandomIndex<T>(this List<T> v)
+    {
+        return (int)(UnityEngine.Random.value * v.Count);
     }
 
     public static T Next<T>(this List<T> v, T current)

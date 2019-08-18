@@ -4,145 +4,60 @@ using UnityEngine;
 
 public class IslandTop : IslandGenerator
 {
-    public GameObject cubePrefab;
-
     [Header("Geography")]
-    public float octave;
-    public float scale;
+    public PerlinNoiseIterationArgs noiseArgs;
     public NoiseGenerationType genType;
 
     [Header("Sea")]
     public bool createSea;
     public GameObject seaPrefab;
     public float seaLevel = 0f;
-
-    [Header("Bowl Edge")]
-    public bool bowlEdge;
     public float bowlEdgeRadius;
     public float bowlEdgeHeight;
     public float bowlSmoothRange;
-
-    [Header("River")]
-    public int riverCount = 2;
-    public float erosionFactor = 1f;
-    public float riverMaxSourceDistance = 0.3f;
-    public GameObject riverCubePrefab;
-
-    [Header("Paths - TODO")]
-    public GameObject pathCubePrefah;
-    [Range(0f, 1f)]
-    public float pathSpawnChance;
-    public float pathAvoidHighgroundFactor = 10f;
-    public float pathEndThreshold;
 
     public override void Create()
     {
         var points = CreateCircle();
 
-        if (bowlEdge)
+        float bowlEdgeRange = createSea ? Radius - bowlEdgeRadius : Radius;
+
+        var edgePoints = points.Where(p => p.DistanceFromCenter >= bowlEdgeRange);
+
+        var middlePoints = points.Except(edgePoints).ToList();
+
+        AddPerlinNoise(middlePoints, noiseArgs, genType);
+
+        TaperPointsFromCenter(middlePoints);
+
+        if (createSea)
         {
-            float bowlEdgeRange = Radius - bowlEdgeRadius;
-
-            var edgePoints = points.Where(p => p.DistanceFromCenter >= bowlEdgeRange);
-
-            var middlePoints = points.Except(edgePoints).ToList();
-
-            AddPerlinNoise(middlePoints, octave, scale, genType);
-
-            TaperPointsFromCenter(middlePoints);
-
             CreateBowlEdge(edgePoints.ToList());
 
             var middleBowlMeetingPoints = points
                 .Where(p => p.DistanceFromCenter >= bowlEdgeRange - bowlSmoothRange && p.DistanceFromCenter <= bowlEdgeRange + bowlSmoothRange)
                 .ToList();
 
+            //Smooth the points so the middle and bowl connect nicely
             Smooth(middleBowlMeetingPoints);
-        }
-        else
-        {
-            AddPerlinNoise(points, octave, scale, genType);
 
-            TaperPointsFromCenter(points);
-        }
-
-        if (createSea)
-        {
+            //Create sea game object
             GameObject sea = Instantiate(seaPrefab);
             sea.transform.SetParent(transform);
 
             sea.transform.position = new Vector3(0f, seaLevel, 0f);
-            sea.transform.localScale = new Vector3(Radius * 0.99f, sea.transform.localScale.y, Radius* 0.99f);
+            sea.transform.localScale = new Vector3(Radius * 0.99f, sea.transform.localScale.y, Radius * 0.99f);
         }
-
-        for(int i = 0; i < riverCount; i++)
-        {
-            var river = CreateRiver(points);
-
-            foreach(var p in river)
-            {
-
-                GameObject rCube = Instantiate(riverCubePrefab);
-                rCube.transform.position = p.Position + new Vector3(0f, CubeSize * 0.01f, 0f);
-                rCube.transform.localScale = Vector3.one * CubeSize;
-            }
-        }
-
-        /*
-        if(Random.value < riverSpawnChance)
-        {
-            var river = CreateRiver(points);
-
-            if (river == null)
-            {
-                Debug.Log("Tried creating river: failed as no path found");
-            }
-            else
-            {
-                CreateRiverCubes(river);
-            }
-        }
-        */
 
         CreateCubesForPoints(points);
     }
 
-    private void CreateCubesForPoints(List<NavigablePoint> points)
+    protected override void OnCreateCubeForPoint(GameObject cube, NavigablePoint point)
     {
-        float maxY = points.Max(p => p.Position.y);
+        base.OnCreateCubeForPoint(cube, point);
 
-        foreach (var p in points)
-        {
-            GameObject cube = Instantiate(cubePrefab);
-
-            cube.transform.position = new Vector3(p.Position.x, (p.Position.y / 2f), p.Position.z);
-            cube.transform.localScale = new Vector3(CubeSize, p.Position.y, CubeSize); //todo only make cube as big as it needs to be to occupy gaps
-
-            float shade = Mathf.InverseLerp(0f, maxY, p.Position.y);
-            cube.GetComponent<MeshRenderer>().material.color = new Color(shade, shade, shade);
-        }
-    }
-
-    private void CreateRiverCubes(List<Vector3> riverPoints)
-    {
-        foreach (var p in riverPoints)
-        {
-            GameObject cube = Instantiate(pathCubePrefah);
-
-            cube.transform.position = new Vector3(p.x, p.y, p.z);
-            cube.transform.localScale = new Vector3(CubeSize, CubeSize, CubeSize);
-        }
-    }
-
-    /// <returns>Series of points along which the river flows</returns>
-    private List<Vector3> CreatePath(List<NavigablePoint> navPoints)
-    {
-        NavigablePoint pointA = navPoints.Random();
-        NavigablePoint pointB = navPoints.Where(p => p.Position.y < pathEndThreshold).ToList().Random();
-
-        AStarPath path = new AStarPath(navPoints.Cast<INavigableTile>().ToList(), pointA, pointB);
-
-        return path.ValidPath?.Select(p => p.Position).ToList();
+        cube.transform.position = new Vector3(point.Position.x, (point.Position.y / 2f), point.Position.z);
+        cube.transform.localScale = new Vector3(CubeSize, point.Position.y, CubeSize); //todo only make cube as big as it needs to be to occupy gaps
     }
 
     private void CreateBowlEdge(List<NavigablePoint> edgePoints)
@@ -224,8 +139,6 @@ public class IslandTop : IslandGenerator
         //values are applied at the end to make smoothing operations order-independent
         Dictionary<NavigablePoint, float> valuesToApply = new Dictionary<NavigablePoint, float>();
 
-        Debug.Log("Smoothing points. Count: " + pointsToSmooth.Count);
-
         foreach(var p in pointsToSmooth)
         {
             float[,] surroundingValues = new float[gaussian.FilterSize.x, gaussian.FilterSize.y];
@@ -262,6 +175,7 @@ public class IslandTop : IslandGenerator
         }
     }
 
+    /*
     private List<NavigablePoint> CreateRiver(List<NavigablePoint> points)
     {
         var source = points
@@ -302,4 +216,5 @@ public class IslandTop : IslandGenerator
 
         return riverPoints;
     }
+    */
 }

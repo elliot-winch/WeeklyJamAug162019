@@ -176,7 +176,7 @@ Transform:
   m_GameObject: {fileID: 170076733}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
   m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -206,7 +206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227505939}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: 90, z: -125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1451927088}
@@ -226,16 +226,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e704bbb7ec7311548bd0d49029c75a09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rollSensitivity: 1
-  pitchSensitivity: 1
-  yawSensitivity: 1
-  gravityAcceleration: 1
-  mass: 1
-  gravityAcceleartion: 0.01
-  dragConstant: 0.01
-  liftConstant: 0.02
+  rollSensitivity: 2
+  pitchSensitivity: 2
+  rollGravity: 0.06
+  pitchGravity: 0.03
+  maximumVelocity: {x: 2, y: 10, z: 2}
+  gravityAcceleration: 10
+  dragConstant: 0
+  liftConstant: 10
   currentAcceleration: {x: 0, y: 0, z: 0}
-  currentVelocity: {x: 0, y: 0, z: 0}
+  currentVelocity: {x: 0, y: 0, z: 1}
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,14 +311,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.0923696, y: -0, z: -0, w: 0.9957248}
+  m_LocalPosition: {x: 0, y: 3.03, z: -11.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 227505940}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &999779203
+  m_LocalEulerAnglesHint: {x: 10.6, y: 0, z: 0}
+--- !u!1 &776760697
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -326,23 +326,52 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 999779204}
-  - component: {fileID: 999779205}
-  - component: {fileID: 999779206}
+  - component: {fileID: 776760699}
+  - component: {fileID: 776760698}
   m_Layer: 0
-  m_Name: Island
+  m_Name: IslandFactory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &999779204
+--- !u!114 &776760698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776760697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8a7f0e5ac4e0f47b6c38effdaa508e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  islandPrefab: {fileID: 3340097774324892220, guid: 4455ad5351c1f1d4587621b7395f8243,
+    type: 3}
+  colorScheme: {fileID: 0}
+  startingOctave:
+    min: 1
+    max: 2
+  startingScale:
+    min: 0.2
+    max: 0.7
+  oim:
+    min: 1.5
+    max: 2.4
+  sim:
+    min: 0.9
+    max: 1.4
+  iterations:
+    min: 2
+    max: 5
+--- !u!4 &776760699
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999779203}
+  m_GameObject: {fileID: 776760697}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -350,62 +379,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &999779205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999779203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a2d6f98fd2638a4cb6710f7425ac839, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  diameter: 1
-  resolution: 50
-  cubePrefab: {fileID: 3659352701107874498, guid: fbcb9686498f5674892243dff8f254ea,
-    type: 3}
-  startingOctave: 1
-  startingResolution: 2
-  octaveScalar: 0.2
-  resolutionScalar: 0.5
-  numberOfIterations: 3
---- !u!114 &999779206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999779203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98d36e79f25f49746937a4997350486e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  diameter: 1
-  resolution: 100
-  cubePrefab: {fileID: 3659352701107874498, guid: fbcb9686498f5674892243dff8f254ea,
-    type: 3}
-  octave: 4
-  scale: 1.4
-  genType: 0
-  createSea: 1
-  seaPrefab: {fileID: 100000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
-  seaLevel: 0.05
-  bowlEdge: 1
-  bowlEdgeRadius: 0.05
-  bowlEdgeHeight: 0.055
-  bowlSmoothRange: 0.025
-  riverCount: 2
-  erosionFactor: 1
-  riverMaxSourceDistance: 0.3
-  riverCubePrefab: {fileID: 8713018493148695528, guid: b18ea2c0eced5c842a13b89e482e3390,
-    type: 3}
-  pathCubePrefah: {fileID: 0}
-  pathSpawnChance: 0
-  pathAvoidHighgroundFactor: 10
-  pathEndThreshold: 0
 --- !u!1 &1451927087
 GameObject:
   m_ObjectHideFlags: 0
