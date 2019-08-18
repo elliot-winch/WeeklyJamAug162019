@@ -197,7 +197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &227505940
 Transform:
   m_ObjectHideFlags: 0
@@ -206,12 +206,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227505939}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 90.7, z: 0}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1451927088}
+  - {fileID: 534669905}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &227505941
 MonoBehaviour:
@@ -311,10 +312,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 91.7, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 227505940}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &999779203
@@ -327,6 +328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 999779204}
   - component: {fileID: 999779205}
+  - component: {fileID: 999779206}
   m_Layer: 0
   m_Name: Island
   m_TagString: Untagged
@@ -346,7 +348,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &999779205
 MonoBehaviour:
@@ -360,16 +362,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a2d6f98fd2638a4cb6710f7425ac839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubePrefab: {fileID: 3659352701107874498, guid: fbcb9686498f5674892243dff8f254ea,
-    type: 3}
   diameter: 1
   resolution: 50
-  seed: {x: 100.3, y: 1002.3}
+  cubePrefab: {fileID: 3659352701107874498, guid: fbcb9686498f5674892243dff8f254ea,
+    type: 3}
   startingOctave: 1
   startingResolution: 2
   octaveScalar: 0.2
   resolutionScalar: 0.5
   numberOfIterations: 3
+--- !u!114 &999779206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999779203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d36e79f25f49746937a4997350486e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diameter: 1
+  resolution: 100
+  cubePrefab: {fileID: 3659352701107874498, guid: fbcb9686498f5674892243dff8f254ea,
+    type: 3}
+  octave: 4
+  scale: 1.4
+  genType: 0
+  createSea: 1
+  seaPrefab: {fileID: 100000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
+  seaLevel: 0.05
+  bowlEdge: 1
+  bowlEdgeRadius: 0.05
+  bowlEdgeHeight: 0.055
+  bowlSmoothRange: 0.025
+  riverCount: 2
+  erosionFactor: 1
+  riverMaxSourceDistance: 0.3
+  riverCubePrefab: {fileID: 8713018493148695528, guid: b18ea2c0eced5c842a13b89e482e3390,
+    type: 3}
+  pathCubePrefah: {fileID: 0}
+  pathSpawnChance: 0
+  pathAvoidHighgroundFactor: 10
+  pathEndThreshold: 0
 --- !u!1 &1451927087
 GameObject:
   m_ObjectHideFlags: 0

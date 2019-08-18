@@ -2,6 +2,10 @@
 
 !Assets
 !Assets/**
+
+Assets/Standard Assets
+Assets/SampleScenes
+
 !GrandmaPackages
 !GrandmaPackages/**
 !ProjectSettings
