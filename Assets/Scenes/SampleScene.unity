@@ -191,6 +191,8 @@ GameObject:
   m_Component:
   - component: {fileID: 227505940}
   - component: {fileID: 227505941}
+  - component: {fileID: 227505942}
+  - component: {fileID: 227505943}
   m_Layer: 0
   m_Name: Glider
   m_TagString: Untagged
@@ -205,15 +207,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227505939}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 90, z: -125}
+  m_LocalRotation: {x: 0.095845714, y: 0, z: 0, w: 0.99539626}
+  m_LocalPosition: {x: 0, y: 90, z: -300}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1451927088}
   - {fileID: 534669905}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 11, y: 0, z: 0}
 --- !u!114 &227505941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,13 +223,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227505939}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e704bbb7ec7311548bd0d49029c75a09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rollSensitivity: 2
-  pitchSensitivity: 2
+  rollSensitivity: 0.25
+  pitchSensitivity: 0.25
   rollGravity: 0.06
   pitchGravity: 0.03
   maximumVelocity: {x: 2, y: 10, z: 2}
@@ -236,6 +238,38 @@ MonoBehaviour:
   liftConstant: 10
   currentAcceleration: {x: 0, y: 0, z: 0}
   currentVelocity: {x: 0, y: 0, z: 1}
+--- !u!114 &227505942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227505939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e50740e83585ed24a8c7c25379ecdecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScale: 1
+  maxGlideRatio: 5
+  liftToLateralRatio: 1
+  startingYZSpeed: 1
+--- !u!114 &227505943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227505939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1cc8e4ef3c40cb4ba45da804e276525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glider: {fileID: 227505942}
+  rollSensitivity: 0.05
+  pitchSensitivity: 0.05
+  invertPitch: 1
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,7 +441,7 @@ Transform:
   m_GameObject: {fileID: 1451927087}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 0.5, z: 10}
+  m_LocalScale: {x: 10, y: 0.5, z: 3}
   m_Children: []
   m_Father: {fileID: 227505940}
   m_RootOrder: 0

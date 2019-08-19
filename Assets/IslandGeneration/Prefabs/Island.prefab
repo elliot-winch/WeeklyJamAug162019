@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a2d6f98fd2638a4cb6710f7425ac839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diameter: 75
+  diameter: 150
   resolution: 75
   cubePrefab: {fileID: 3659352701107874498, guid: fbcb9686498f5674892243dff8f254ea,
     type: 3}
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98d36e79f25f49746937a4997350486e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diameter: 75
+  diameter: 150
   resolution: 75
   cubePrefab: {fileID: 3659352701107874498, guid: fbcb9686498f5674892243dff8f254ea,
     type: 3}

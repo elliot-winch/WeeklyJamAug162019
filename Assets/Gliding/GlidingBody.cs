@@ -21,6 +21,13 @@ public class GlidingBody : MonoBehaviour
 
     public float CurrentHeight => transform.position.y;
 
+    private Vector3? prevMousePos;
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     private void FixedUpdate()
     {
         UserControlUpdate();
@@ -52,6 +59,14 @@ public class GlidingBody : MonoBehaviour
 
     private void UserControlUpdate()
     {
+        transform.Rotate(Vector3.forward, -Input.GetAxis("Mouse X") * rollSensitivity);
+        transform.Rotate(Vector3.right, Input.GetAxis("Mouse Y") * pitchSensitivity);
+
+
+        /*
+         * Key controls 
+         * Issue: Cannot precisely control angle - inout is binary
+         * 
         float rollInput = Input.GetAxis("Horizontal");
         float pitchInput = Input.GetAxis("Vertical");
 
@@ -60,6 +75,7 @@ public class GlidingBody : MonoBehaviour
 
         transform.Rotate(Vector3.forward, rollGravity * RollAngle());
         transform.Rotate(Vector3.right, pitchGravity * AngleOfAttack());
+        */
     }
 
     private Vector3 CalculateGravity()
