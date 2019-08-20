@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Glider : MonoBehaviour
 {
@@ -12,29 +10,47 @@ public class Glider : MonoBehaviour
     public float gravityAcceleation;
     */
 
+    //Insepctor Variables
     public float timeScale;
     public float maxGlideRatio;
-    public float liftToLateralRatio;
     [SerializeField] float startingYZSpeed;
 
-    private float R;
+    public float liftToLateralRatio;
+    public float lateralDrag;
+
+    //Variables for calculation
     private float pitchAngle; //in radians and anti-clockwise
     private float rollAngle;
+
+    //Variables, refreshed frame-to-frame
+    private float R;
     private float vy;
     private float vx;
-
     private float t;
 
+    //Properties
+    public Vector3 Velocity { get; private set; }
+    public float Heading { get; private set; }
+    //Velocity in the local frame, then get forward component
+    public float Airspeed => (transform.worldToLocalMatrix * Velocity).z;
+
+    //Public Functions
     public void Roll(float angle)
     {
-        rollAngle += angle;
+        rollAngle += angle * t;
     }
 
     public void Pitch(float angle)
     {
-        pitchAngle += angle;
+        pitchAngle += angle * t;
     }
 
+    public void Level()
+    {
+        rollAngle -= rollAngle;
+    }
+
+    //Private functions
     private void Start()
     {
         vy = startingYZSpeed;
@@ -47,14 +63,18 @@ public class Glider : MonoBehaviour
         UpdateXPhysics();
         UpdateYZPhysics();
         UpdateTransform();
+        UpdateParameters();
     }
 
     private void UpdateXPhysics()
     {
         R = maxGlideRatio * Mathf.Cos(rollAngle);
 
-        float acc = liftToLateralRatio * maxGlideRatio * Mathf.Sin(rollAngle);
+        float acc = (liftToLateralRatio * maxGlideRatio * Mathf.Sin(rollAngle));
         vx += acc * t;
+
+        float latDragVel = (lateralDrag * -Mathf.Sign(vx) * vx * vx) * t;
+        vx += latDragVel;
     }
 
     private void UpdateYZPhysics()
@@ -65,7 +85,7 @@ public class Glider : MonoBehaviour
 
         vy += acc * t;
         pitchAngle += angAcc * t;
-        pitchAngle = Normalise(pitchAngle, 0f, Mathf.PI * 2f);
+        pitchAngle = MathUtility.IntoRange(pitchAngle, 0f, Mathf.PI * 2f);
     }
 
     private void UpdateTransform()
@@ -74,9 +94,18 @@ public class Glider : MonoBehaviour
         float y = vy * Mathf.Sin(pitchAngle) * t;
         float z = vy * Mathf.Cos(pitchAngle) * t;
 
-        transform.position += new Vector3(x, y, z);
+        Velocity = new Vector3(x, y, z);
+
+        transform.position += Velocity;
 
         transform.rotation = Quaternion.Euler(new Vector3(CalcToTransformAngle(pitchAngle), 0f, CalcToTransformAngle(rollAngle)));
+    }
+
+    private void UpdateParameters()
+    {
+        //Update paramters
+        var headingVec = new Vector3(transform.position.x, 0f, transform.position.z).normalized;
+        Heading = -Mathf.Rad2Deg * MathUtility.IntoRange(Mathf.Acos(Vector3.Dot(Vector3.forward, headingVec)), -180f, 180f);
     }
 
     /*
@@ -131,13 +160,5 @@ public class Glider : MonoBehaviour
     private float CalcToTransformAngle(float calcAngle)
     {
         return -Mathf.Rad2Deg * calcAngle;
-    }
-
-    private float Normalise(float value, float min, float max)
-    {
-        float width = max - min;
-        float offsetValue = value - min;
-
-        return (offsetValue - (Mathf.Floor(offsetValue / width) * width)) + min;
     }
 }

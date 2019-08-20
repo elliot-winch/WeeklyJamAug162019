@@ -45,10 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diameter: 150
   resolution: 75
-  cubePrefab: {fileID: 3659352701107874498, guid: fbcb9686498f5674892243dff8f254ea,
+  cubePrefab: {fileID: 5613501515002003335, guid: 45e00e30ca173d544bb329f3dbc8b16e,
     type: 3}
   frameCreateLimit: 300
-  heightMapShading: 1
+  heightMapShading: 0
   noiseArgs:
     iterations: 3
     startingOctave: 1
@@ -133,10 +133,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diameter: 150
   resolution: 75
-  cubePrefab: {fileID: 3659352701107874498, guid: fbcb9686498f5674892243dff8f254ea,
+  cubePrefab: {fileID: 8342397174406445255, guid: fbcb9686498f5674892243dff8f254ea,
     type: 3}
   frameCreateLimit: 300
-  heightMapShading: 1
+  heightMapShading: 0
   noiseArgs:
     iterations: 3
     startingOctave: 1.5
@@ -147,9 +147,9 @@ MonoBehaviour:
   createSea: 1
   seaPrefab: {fileID: 100000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
   seaLevel: 3
-  bowlEdgeRadius: 3.75
+  bowlEdgeRadius: 5
   bowlEdgeHeight: 4.125
-  bowlSmoothRange: 1.875
+  bowlSmoothRange: 3
 --- !u!1 &7269277294956957718
 GameObject:
   m_ObjectHideFlags: 0

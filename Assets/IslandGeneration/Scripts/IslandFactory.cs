@@ -41,16 +41,14 @@ public class IslandFactory : MonoBehaviour
         top.createSea = Random.value > 0.5f;
         top.genType = Random.value > 0.5f ? IslandGenerator.NoiseGenerationType.Smooth : IslandGenerator.NoiseGenerationType.Ridged;
 
-        var noiseArgs = new PerlinNoiseIterationArgs()
+        top.noiseArgs = new PerlinNoiseIterationArgs()
         {
             iterations = (int)iterations.GetRandomValue(),
             startingOctave = startingOctave.GetRandomValue(),
             startingScale = startingScale.GetRandomValue(),
             scaleIterationModifier = sim.GetRandomValue(),
             octaveIterationModifier = oim.GetRandomValue()
-        };
-
-        top.noiseArgs = noiseArgs;
+        }; ;
 
         Debug.Log(top.noiseArgs);
 

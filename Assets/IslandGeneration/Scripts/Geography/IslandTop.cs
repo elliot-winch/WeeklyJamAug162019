@@ -26,6 +26,7 @@ public class IslandTop : IslandGenerator
 
         var middlePoints = points.Except(edgePoints).ToList();
 
+        Debug.Log(noiseArgs);
         AddPerlinNoise(middlePoints, noiseArgs, genType);
 
         TaperPointsFromCenter(middlePoints);
@@ -52,12 +53,12 @@ public class IslandTop : IslandGenerator
         CreateCubesForPoints(points);
     }
 
-    protected override void OnCreateCubeForPoint(GameObject cube, NavigablePoint point)
+    protected override void OnCreateCubeForPoint(NavigablePointCube cube, NavigablePoint point)
     {
         base.OnCreateCubeForPoint(cube, point);
 
         cube.transform.position = new Vector3(point.Position.x, (point.Position.y / 2f), point.Position.z);
-        cube.transform.localScale = new Vector3(CubeSize, point.Position.y, CubeSize); //todo only make cube as big as it needs to be to occupy gaps
+        cube.Scale(new Vector3(CubeSize, point.Position.y, CubeSize));
     }
 
     private void CreateBowlEdge(List<NavigablePoint> edgePoints)

@@ -25,11 +25,11 @@ public class IslandBase : IslandGenerator
         CreateCubesForPoints(points);
     }
 
-    protected override void OnCreateCubeForPoint(GameObject cube, NavigablePoint point)
+    protected override void OnCreateCubeForPoint(NavigablePointCube cube, NavigablePoint point)
     {
         base.OnCreateCubeForPoint(cube, point);
 
         cube.transform.position = new Vector3(point.Position.x, (-point.Position.y / 2f), point.Position.z);
-        cube.transform.localScale = new Vector3(CubeSize, point.Position.y, CubeSize); //todo only make cube as big as it needs to be to occupy gaps
+        cube.Scale(new Vector3(CubeSize, point.Position.y, CubeSize)); //todo only make cube as big as it needs to be to occupy gaps
     }
 }

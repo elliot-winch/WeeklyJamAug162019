@@ -106,13 +106,6 @@ public class GlidingBody : MonoBehaviour
         return Vector3.SignedAngle(transform.forward, horizontal, transform.right);
     }
 
-    private float RollAngle()
-    {
-        Vector3 horizontal = Vector3.ProjectOnPlane(transform.right, Vector3.up);
-
-        return Vector3.SignedAngle(transform.right, horizontal, transform.forward);
-    }
-
     /*
     private Vector3 CalculateRollLateralForce()
     {

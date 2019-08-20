@@ -9,7 +9,7 @@ public class NavigablePoint : INavigableTile
     public IEnumerable<INavigableTile> Neighbours { get; set; }
 
     public Vector2Int GridPosition;
-    public GameObject cube;
+    public NavigablePointCube cube;
 
     public float DistanceFromCenter => Mathf.Sqrt(Position.x * Position.x + Position.z * Position.z);
 

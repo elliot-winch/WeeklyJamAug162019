@@ -20,7 +20,7 @@ public abstract class IslandGenerator : MonoBehaviour
 
     public float diameter = 1f;
     public int resolution = 100;
-    public GameObject cubePrefab;
+    public NavigablePointCube cubePrefab;
     public int frameCreateLimit = 25;
     public bool heightMapShading;
 
@@ -31,9 +31,6 @@ public abstract class IslandGenerator : MonoBehaviour
     public List<NavigablePoint> Points => pointMap.Values.ToList();
 
     protected Dictionary<Vector2Int, NavigablePoint> pointMap; //for macro operations, like smoothing
-
-    public abstract void Create();
-    protected virtual void OnCreateCubeForPoint(GameObject cube, NavigablePoint point) { }
 
     private static List<Vector2Int> XNeighbours = new List<Vector2Int>()
     {
@@ -46,6 +43,9 @@ public abstract class IslandGenerator : MonoBehaviour
         new Vector2Int(0,  1),
         new Vector2Int(0, -1),
     };
+
+    public abstract void Create();
+    protected virtual void OnCreateCubeForPoint(NavigablePointCube cube, NavigablePoint point) { }
 
     protected List<NavigablePoint> CreateCircle()
     {
@@ -115,7 +115,7 @@ public abstract class IslandGenerator : MonoBehaviour
 
         foreach (var p in points)
         {
-            GameObject cube = Instantiate(cubePrefab);
+            var cube = Instantiate(cubePrefab);
 
             p.cube = cube;
 
