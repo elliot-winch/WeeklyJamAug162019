@@ -208,15 +208,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227505939}
-  m_LocalRotation: {x: 0.08284545, y: 0.500554, z: -0.048197854, w: 0.8603833}
-  m_LocalPosition: {x: 0, y: 90, z: -300}
+  m_LocalRotation: {x: 0.095845714, y: 0, z: 0, w: 0.99539626}
+  m_LocalPosition: {x: -300, y: 90, z: -300}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1451927088}
   - {fileID: 534669905}
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 11, y: 60.38, z: 0}
+  m_LocalEulerAnglesHint: {x: 11, y: 0, z: 0}
 --- !u!114 &227505941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,11 +251,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50740e83585ed24a8c7c25379ecdecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 5
+  timeScale: 1
   maxGlideRatio: 5
   startingYZSpeed: 1
   liftToLateralRatio: 20
   lateralDrag: 1
+  vScale: 10
+  thetaScale: 0.1
 --- !u!114 &227505943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   glider: {fileID: 227505942}
   rollSensitivity: 1
-  pitchSensitivity: 1
+  pitchSensitivity: 10
   invertPitch: 1
   level: 120
 --- !u!114 &227505944
