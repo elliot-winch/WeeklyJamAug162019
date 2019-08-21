@@ -146,10 +146,10 @@ MonoBehaviour:
   genType: 0
   createSea: 1
   seaPrefab: {fileID: 100000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
-  seaLevel: 3
-  bowlEdgeRadius: 5
-  bowlEdgeHeight: 4.125
-  bowlSmoothRange: 3
+  seaLevel: 6
+  bowlEdgeRadius: 10
+  bowlEdgeHeight: 7
+  bowlSmoothRange: 2
 --- !u!1 &7269277294956957718
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,6 +160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4390309185271675231}
   - component: {fileID: 8769904785734508876}
+  - component: {fileID: 3379129177318329431}
   m_Layer: 0
   m_Name: Structures
   m_TagString: Untagged
@@ -197,13 +198,37 @@ MonoBehaviour:
   islandPathPrefab: {fileID: 7222187245875719465, guid: 32b6cc71e79547f42a82d36750f40fef,
     type: 3}
   maxPathIterations: 7
-  minIntersectionSeparation: 3
+  minIntersectionSeparation: 8
   pathLength:
-    min: 6
-    max: 12
+    min: 15
+    max: 30
   pathCubePrefab: {fileID: 3659352701107874498, guid: bad10c719e5f35b40af8197e20b69ee7,
     type: 3}
   buildingPrefabs:
   - {fileID: 5521325492430993130, guid: 413824f9147fcf64792caa9055e88e06, type: 3}
   maxBuildingPerIteration: 3
   possibleBuildingSitesFactor: 3
+--- !u!114 &3379129177318329431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7269277294956957718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e3f7b631660f3649a945264448db5ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  density: 2
+  iterationPointCount: 2
+  heightWeighting: 0
+  treePrefabs:
+  - {fileID: 100000, guid: d4904481b601e4645a013ff8e7a11f35, type: 3}
+  - {fileID: 100000, guid: bc4be6131f8aa05488dfd721336e3cb9, type: 3}
+  - {fileID: 100000, guid: 4c6b6d3516769584fb402fff34f16e86, type: 3}
+  - {fileID: 1000011901478696, guid: 7de4ed2e68b8f6b41bf83021ed49741e, type: 3}
+  - {fileID: 100000, guid: 2ca5f16bcd632fb478716f22cccb7743, type: 3}
+  - {fileID: 141540, guid: 82f258a1b46e8b640908bfe7ad2de692, type: 3}
+  - {fileID: 198302, guid: 7561f0cfc3da4a641beec58b15914c4b, type: 3}
+  - {fileID: 1000013574824664, guid: 823e5f2073f8f044d9f3208c1125dd73, type: 3}

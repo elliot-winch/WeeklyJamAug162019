@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GliderUI : MonoBehaviour
 {
-    public Glider glider;
+    public PhysicsGlider glider;
     public HUDInstrument airspeedIndicator;
     public RadialSlider altimeter;
     public HUDCompass compass;

@@ -29,6 +29,13 @@ public abstract class IslandGenerator : MonoBehaviour
 
     public Dictionary<Vector2Int, NavigablePoint> PointMap => pointMap;
     public List<NavigablePoint> Points => pointMap.Values.ToList();
+    public float HighestPoint
+    {
+        get
+        {
+            return Points.Max(p => p.Position.y);
+        }
+    }
 
     protected Dictionary<Vector2Int, NavigablePoint> pointMap; //for macro operations, like smoothing
 
@@ -164,7 +171,7 @@ public abstract class IslandGenerator : MonoBehaviour
 
         points.ForEach(p =>
         {
-            float noise = Mathf.PerlinNoise((p.Position.x * octave) + seed.Value.x, (p.Position.z * octave) + seed.Value.y) * scale;
+            float noise = Mathf.PerlinNoise((p.GridPosition.x * octave) + seed.Value.x, (p.GridPosition.y * octave) + seed.Value.y) * scale;
 
             if(genType == NoiseGenerationType.Ridged)
             {

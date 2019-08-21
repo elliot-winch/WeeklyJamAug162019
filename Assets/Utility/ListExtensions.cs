@@ -10,6 +10,7 @@ public static class ListExtensions
         return v.Where(x => x != null);
     }
 
+    #region Random
     public static List<T> Random<T>(this List<T> v, int count)
     {
         var operationsList = v.ToList();
@@ -42,6 +43,44 @@ public static class ListExtensions
         return (int)(UnityEngine.Random.value * v.Count);
     }
 
+    public static T RemoveRandom<T>(this List<T> v)
+    {
+        int r = v.RandomIndex();
+        T o = v[r];
+        v.RemoveAt(r);
+        return o;
+    }
+
+    public static T RandomWeighted<T>(this List<T> v, Func<T, float> weightFunction)
+    {
+        if(v.Count <= 0)
+        {
+            return default;
+        }
+
+        float totalWeight = v.Sum(x => weightFunction(x));
+
+        if(totalWeight <= 0f)
+        {
+            Debug.Log("RandomWeight: Requires a positive weight");
+            return default;
+        }
+
+        float rand = UnityEngine.Random.value * totalWeight;
+        float count = 0f;
+        int index = -1;
+
+        while(count < rand)
+        {
+            index++;
+            count += weightFunction(v[index]);
+        }
+
+        return v[index];
+    }
+    #endregion
+
+    #region Next
     public static T Next<T>(this List<T> v, T current)
     {
         return v[NextIndex(v.IndexOf(current), v.Count)];
@@ -75,7 +114,9 @@ public static class ListExtensions
     {
         return v.Count > 0 ? v[v.Count - 1] : default;
     }
+    #endregion
 
+    #region Unity
     public static void DestroyAll(this List<GameObject> v)
     {
         foreach(var g in v)
@@ -97,4 +138,5 @@ public static class ListExtensions
         
         v.Clear();
     }
+    #endregion
 }
