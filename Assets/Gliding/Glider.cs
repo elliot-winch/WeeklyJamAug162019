@@ -84,6 +84,6 @@ public class Glider : MonoBehaviour
     {
         //Update paramters
         var headingVec = new Vector3(transform.position.x, 0f, transform.position.z).normalized;
-        Heading = -Mathf.Rad2Deg * MathUtility.IntoRange(Mathf.Acos(Vector3.Dot(Vector3.forward, headingVec)), -180f, 180f);
+        Heading = -Mathf.Rad2Deg * MathUtility.Mod(Mathf.Acos(Vector3.Dot(Vector3.forward, headingVec)), -180f, 180f);
     }
 }

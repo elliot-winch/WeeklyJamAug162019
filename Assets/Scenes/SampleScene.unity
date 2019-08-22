@@ -194,14 +194,13 @@ GameObject:
   - component: {fileID: 227505942}
   - component: {fileID: 227505943}
   - component: {fileID: 227505944}
-  - component: {fileID: 227505945}
   m_Layer: 0
   m_Name: Glider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &227505940
 Transform:
   m_ObjectHideFlags: 0
@@ -209,14 +208,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227505939}
-  m_LocalRotation: {x: 0.095845714, y: 0, z: 0, w: 0.99539626}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 90, z: -300}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1451927088}
+  - {fileID: 534669905}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 11, y: 0, z: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &227505941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,18 +246,33 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227505939}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e50740e83585ed24a8c7c25379ecdecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  k: 1
   timeScale: 1
-  maxGlideRatio: 5
-  startingYZSpeed: 1
-  liftToLateralRatio: 20
-  lateralDrag: 1
-  vScale: 10
-  thetaScale: 0.1
+  positionScale: 5
+  yz:
+    userSensitivity: 3
+    physicsSensitivity: 1
+    velocityScale: 1
+    angleVelocityBounds:
+      min: -0.5
+      max: 0.5
+    angleBounds:
+      min: -100
+      max: 100
+    velocityBounds:
+      min: 0.001
+      max: 1000
+    Angle: -0.22
+    Velocity: 3
+    glideRatio: 5
+    dragFactor: 1
+  horizontalUserSensitivty: 0.01
+  bankingFactor: 1
 --- !u!114 &227505943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,12 +280,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227505939}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a1cc8e4ef3c40cb4ba45da804e276525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glider: {fileID: 227505945}
+  glider: {fileID: 0}
   rollSensitivity: 1
   pitchSensitivity: 1
   invertPitch: 1
@@ -291,31 +306,6 @@ MonoBehaviour:
   airspeedIndicator: {fileID: 587377045}
   altimeter: {fileID: 569421767}
   compass: {fileID: 580072043}
---- !u!114 &227505945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227505939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 953c57593d901ea4faf636d199e8039e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeScale: 0
-  pitchAngle:
-    max: 45
-    level: 0
-    min: -45
-  forwardVelocity:
-    max: 0
-    level: 10
-    min: 0
-  downwardVelocity:
-    max: 0
-    level: 2
-    min: 0
 --- !u!1 &299830392
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,11 +771,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.18738031, y: -0, z: -0, w: 0.98228747}
-  m_LocalPosition: {x: 0, y: 70, z: -100}
-  m_LocalScale: {x: 1, y: 1.1362188, z: 1.1362188}
+  m_LocalRotation: {x: 0.09236961, y: -0, z: -0, w: 0.99572486}
+  m_LocalPosition: {x: 0, y: 4, z: -10}
+  m_LocalScale: {x: 1, y: 1.1362189, z: 1.1362189}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 227505940}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 10.6, y: 0, z: 0}
 --- !u!1 &544599683
@@ -1155,7 +1145,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1451927087
 GameObject:
@@ -1298,7 +1288,7 @@ PrefabInstance:
     - target: {fileID: 3340097774324892219, guid: 4455ad5351c1f1d4587621b7395f8243,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3340097774324892219, guid: 4455ad5351c1f1d4587621b7395f8243,
         type: 3}
@@ -1335,7 +1325,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1689122992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1411,7 +1401,7 @@ RectTransform:
   - {fileID: 569421766}
   - {fileID: 299830393}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1561,5 +1551,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

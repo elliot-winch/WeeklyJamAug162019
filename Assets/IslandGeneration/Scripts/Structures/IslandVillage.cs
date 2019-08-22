@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class IslandStructureGenerator: MonoBehaviour
+public class IslandVillage: MonoBehaviour
 { 
     [Header("Paths")]
     public int pathClusterCount;

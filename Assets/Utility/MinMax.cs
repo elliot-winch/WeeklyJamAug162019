@@ -10,4 +10,9 @@ public struct MinMax
     {
         return Mathf.Lerp(min, max, Random.value);
     }
+
+    public float Clamp(float value)
+    {
+        return Mathf.Clamp(value, min, max);
+    }
 }

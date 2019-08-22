@@ -57,7 +57,7 @@ public class IslandFactory : MonoBehaviour
             g.Create();
         }
 
-        var structures = currentIsland.GetComponentInChildren<IslandStructureGenerator>();
+        var structures = currentIsland.GetComponentInChildren<IslandVillage>();
         
         structures.Create(top);
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class MathUtility
 {
-    public static float IntoRange(float value, float min, float max)
+    public static float Mod(float value, float min, float max)
     {
         float width = max - min;
         float offsetValue = value - min;
